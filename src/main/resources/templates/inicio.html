@@ -1,12 +1,272 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>CapilarDía</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f1e8;
+            color: #2f2f2f;
+        }
+
+        .topbar {
+            background: #2f2f2f;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        header {
+            background: #fffaf3;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e4d8ca;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2f2f2f;
+        }
+
+        .logo span {
+            color: #b89a67;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #2f2f2f;
+            font-weight: bold;
+        }
+
+        .hero {
+            width: 88%;
+            margin: 30px auto;
+            background: linear-gradient(
+                90deg,
+                #ead8c4,
+                #f8eee3
+            );
+            border-radius: 14px;
+            padding: 70px 60px;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-contenido {
+            max-width: 550px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #b89a67;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        .boton-secundario {
+            background: #2f2f2f;
+        }
+
+        .seccion {
+            width: 88%;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .seccion h2 {
+            margin-bottom: 25px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta {
+            background: #fffaf3;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e4d8ca;
+        }
+
+        footer {
+            margin-top: 60px;
+            background: #2f2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <h1>CapilarDía funcionando con Spring Boot</h1>
+    <div class="topbar">
+        Belleza y cuidado profesional para tu cabello
+    </div>
+
+    <header>
+
+        <div class="logo">
+            Capilar<span>Día</span>
+        </div>
+
+        <nav>
+
+            <a th:href="@{/}">Inicio</a>
+
+            <a th:href="@{/productos}">
+                Productos
+            </a>
+
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-contenido">
+
+            <h1>
+                Cuidado profesional para tu cabello
+            </h1>
+
+            <p>
+                Descubre productos pensados para fortalecer,
+                cuidar y mantener tu cabello saludable.
+            </p>
+
+            <a th:href="@{/productos}"
+               class="boton">
+
+                Ver productos
+
+            </a>
+
+            <a th:href="@{/productos/nuevo}"
+               class="boton boton-secundario">
+
+                Agregar producto
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <section class="seccion">
+
+        <h2>
+            CapilarDía
+        </h2>
+
+        <div class="tarjetas">
+
+            <div class="tarjeta">
+
+                <h3>
+                    Productos
+                </h3>
+
+                <p>
+                    Consulta los productos disponibles
+                    en el sistema.
+                </p>
+
+                <a th:href="@{/productos}"
+                   class="boton">
+
+                    Ver productos
+
+                </a>
+
+            </div>
+
+            <div class="tarjeta">
+
+                <h3>
+                    Registrar
+                </h3>
+
+                <p>
+                    Agrega nuevos productos al catálogo.
+                </p>
+
+                <a th:href="@{/productos/nuevo}"
+                   class="boton">
+
+                    Registrar
+
+                </a>
+
+            </div>
+
+            <div class="tarjeta">
+
+                <h3>
+                    Gestión
+                </h3>
+
+                <p>
+                    Edita o elimina los productos registrados.
+                </p>
+
+                <a th:href="@{/productos}"
+                   class="boton">
+
+                    Gestionar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        CapilarDía © 2026
+
+    </footer>
 
 </body>
+
 </html>

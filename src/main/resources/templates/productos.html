@@ -10,45 +10,192 @@
 
     <title>Productos | CapilarDía</title>
 
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f1e8;
+            color: #2f2f2f;
+        }
+
+        .contenedor {
+            width: 92%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .nuevo {
+            background: #b89a67;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .tabla-contenedor {
+            background: #fffaf3;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2d8cb;
+            text-align: left;
+        }
+
+        th {
+            background: #eee4d6;
+        }
+
+        .editar {
+            background: #b89a67;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .eliminar {
+            background: #a94442;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .vacio {
+            text-align: center;
+            padding: 25px;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <h1>Productos CapilarDía</h1>
+<div class="contenedor">
 
-    <div>
+    <div class="encabezado">
 
-        <div th:if="${#lists.isEmpty(productos)}">
+        <h1>Productos CapilarDía</h1>
 
-            <p>No hay productos registrados.</p>
+        <a th:href="@{/productos/nuevo}"
+           class="nuevo">
 
-        </div>
+            + Nuevo producto
 
-        <div th:each="producto : ${productos}">
-
-            <h2 th:text="${producto.nombre}">
-                Nombre del producto
-            </h2>
-
-            <p>
-                Precio:
-                <strong th:text="${producto.precio}">
-                    0
-                </strong>
-            </p>
-
-            <p>
-                Stock:
-                <span th:text="${producto.stock}">
-                    0
-                </span>
-            </p>
-
-            <hr>
-
-        </div>
+        </a>
 
     </div>
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Categoría</th>
+                    <th>Fabricante</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr th:if="${#lists.isEmpty(productos)}">
+
+                    <td colspan="7"
+                        class="vacio">
+
+                        No hay productos registrados.
+
+                    </td>
+
+                </tr>
+
+                <tr th:each="producto : ${productos}">
+
+                    <td th:text="${producto.idProducto}">
+                        1
+                    </td>
+
+                    <td th:text="${producto.nombre}">
+                        Shampoo
+                    </td>
+
+                    <td th:text="${producto.precio}">
+                        0.0
+                    </td>
+
+                    <td th:text="${producto.stock}">
+                        0
+                    </td>
+
+                    <td th:text="${producto.idCategoria}">
+                        1
+                    </td>
+
+                    <td th:text="${producto.idFabricante}">
+                        1
+                    </td>
+
+                    <td>
+
+                        <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}"
+                           class="editar">
+
+                            Editar
+
+                        </a>
+
+                        <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}"
+                           class="eliminar"
+                           onclick="return confirm('¿Desea eliminar este producto?');">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 </body>
 

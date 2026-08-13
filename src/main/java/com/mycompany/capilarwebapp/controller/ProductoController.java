@@ -2,15 +2,16 @@ package com.mycompany.capilarwebapp.controller;
 
 import com.mycompany.capilarwebapp.modelo.Producto;
 import com.mycompany.capilarwebapp.service.ProductoService;
-import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * Controlador web para consultar los productos de CapilarDía.
+ * Controlador para gestionar los productos de CapilarDía.
  */
 @Controller
+@RequestMapping("/productos")
 public class ProductoController {
 
     private final ProductoService productoService;
@@ -19,18 +20,55 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    /**
-     * Muestra la lista de productos registrados.
-     */
-    @GetMapping("/productos")
+    // Mostrar todos los productos
+    @GetMapping
     public String listarProductos(Model model) {
 
-        List<Producto> productos =
-                productoService.listarProductos();
-
-        model.addAttribute("productos", productos);
+        model.addAttribute("productos",
+                productoService.listarProductos());
 
         return "productos";
     }
 
+    // Mostrar formulario para nuevo producto
+    @GetMapping("/nuevo")
+    public String nuevoProducto(Model model) {
+
+        model.addAttribute("producto", new Producto());
+
+        return "producto-form";
+    }
+
+    // Guardar producto
+    @PostMapping("/guardar")
+    public String guardarProducto(@ModelAttribute Producto producto) {
+
+        productoService.guardarProducto(producto);
+
+        return "redirect:/productos";
+    }
+
+    // Mostrar formulario para editar
+    @GetMapping("/editar/{id}")
+    public String editarProducto(@PathVariable int id, Model model) {
+
+        Optional<Producto> producto =
+                productoService.buscarPorId(id);
+
+        if (producto.isPresent()) {
+            model.addAttribute("producto", producto.get());
+            return "producto-form";
+        }
+
+        return "redirect:/productos";
+    }
+
+    // Eliminar producto
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProducto(@PathVariable int id) {
+
+        productoService.eliminarProducto(id);
+
+        return "redirect:/productos";
+    }
 }
