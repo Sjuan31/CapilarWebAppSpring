@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Productos | CapilarDía</title>
+
+</head>
+
+<body>
+
+    <h1>Productos CapilarDía</h1>
+
+    <div>
+
+        <div th:if="${#lists.isEmpty(productos)}">
+
+            <p>No hay productos registrados.</p>
+
+        </div>
+
+        <div th:each="producto : ${productos}">
+
+            <h2 th:text="${producto.nombre}">
+                Nombre del producto
+            </h2>
+
+            <p>
+                Precio:
+                <strong th:text="${producto.precio}">
+                    0
+                </strong>
+            </p>
+
+            <p>
+                Stock:
+                <span th:text="${producto.stock}">
+                    0
+                </span>
+            </p>
+
+            <hr>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
