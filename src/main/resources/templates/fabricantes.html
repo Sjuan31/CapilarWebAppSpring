@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fabricantes | CapilarDía</title>
+
+  
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>Fabricantes CapilarDía</h1>
+
+        <a th:href="@{/fabricantes/nuevo}"
+           class="nuevo">
+
+            + Nuevo fabricante
+
+        </a>
+
+    </div>
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr th:if="${#lists.isEmpty(fabricantes)}">
+
+                    <td colspan="6"
+                        class="vacio">
+
+                        No hay fabricantes registrados.
+
+                    </td>
+
+                </tr>
+
+                <tr th:each="fabricante : ${fabricantes}">
+
+                    <td th:text="${fabricante.idFabricante}">
+                        1
+                    </td>
+
+                    <td th:text="${fabricante.nombre}">
+                        Fabricante
+                    </td>
+
+                    <td th:text="${fabricante.descripcion}">
+                        Descripción
+                    </td>
+
+                    <td th:text="${fabricante.direccion}">
+                        Dirección
+                    </td>
+
+                    <td th:text="${fabricante.telefono}">
+                        Teléfono
+                    </td>
+
+                    <td>
+
+                        <a th:href="@{/fabricantes/editar/{id}(id=${fabricante.idFabricante})}"
+                           class="editar">
+
+                            Editar
+
+                        </a>
+
+                        <a th:href="@{/fabricantes/eliminar/{id}(id=${fabricante.idFabricante})}"
+                           class="eliminar"
+                           onclick="return confirm('¿Desea eliminar este fabricante?');">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

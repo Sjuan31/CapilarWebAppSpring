@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Clientes | CapilarDía</title>
+
+    
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Capilar<span>Día</span>
+    </div>
+
+    <nav>
+
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/productos}">Productos</a>
+        <a th:href="@{/categorias}">Categorías</a>
+        <a th:href="@{/fabricantes}">Fabricantes</a>
+        <a th:href="@{/clientes}">Clientes</a>
+
+    </nav>
+
+</header>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>Clientes CapilarDía</h1>
+
+        <a th:href="@{/clientes/nuevo}"
+           class="nuevo">
+
+            + Nuevo cliente
+
+        </a>
+
+    </div>
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr th:if="${#lists.isEmpty(clientes)}">
+
+                    <td colspan="8"
+                        class="vacio">
+
+                        No hay clientes registrados.
+
+                    </td>
+
+                </tr>
+
+                <tr th:each="cliente : ${clientes}">
+
+                    <td th:text="${cliente.idCliente}">
+                        1
+                    </td>
+
+                    <td th:text="${cliente.nombre}">
+                        Nombre
+                    </td>
+
+                    <td th:text="${cliente.email}">
+                        correo@correo.com
+                    </td>
+
+                    <td th:text="${cliente.telefono}">
+                        Teléfono
+                    </td>
+
+                    <td th:text="${cliente.direccion}">
+                        Dirección
+                    </td>
+
+                    <td th:text="${cliente.rol}">
+                        CLIENTE
+                    </td>
+
+                    <td th:text="${cliente.estado}">
+                        ACTIVO
+                    </td>
+
+                    <td>
+
+                        <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}"
+                           class="editar">
+
+                            Editar
+
+                        </a>
+
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.idCliente})}"
+                           class="eliminar"
+                           onclick="return confirm('¿Desea eliminar este cliente?');">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

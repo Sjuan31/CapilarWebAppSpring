@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Carrito | CapilarDía</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/capilar.css}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-superior">
+
+        <div class="header-contenido">
+
+            <div class="soporte">
+                <small>Soporte al cliente</small>
+                <strong>324 608 7432</strong>
+            </div>
+
+            <a th:href="@{/}"
+               class="logo">
+
+                CAPILAR<span>DÍA</span>
+
+            </a>
+
+            <div class="cuenta">
+
+                <a href="#">
+                    Mi cuenta
+                </a>
+
+                <a th:href="@{/carrito}">
+                    Carrito
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="navbar">
+
+        <div class="navbar-contenido">
+
+            <nav class="menu">
+
+                <a th:href="@{/}">
+                    Inicio
+                </a>
+
+                <a th:href="@{/productos}">
+                    Productos
+                </a>
+
+                <a href="#">
+                    Nosotros
+                </a>
+
+                <a href="#">
+                    Contacto
+                </a>
+
+            </nav>
+
+            <a th:href="@{/productos}"
+               class="btn-carrito">
+
+                Seguir comprando
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<section class="encabezado">
+
+    <div class="encabezado-contenido">
+
+        <span>
+            CapilarDía
+        </span>
+
+        <h1>
+            Tu carrito
+        </h1>
+
+        <p>
+            Revisa tus productos antes de finalizar tu compra.
+        </p>
+
+    </div>
+
+</section>
+
+<main class="contenedor">
+
+    <div th:if="${#lists.isEmpty(productos)}"
+         class="vacio">
+
+        <div class="icono-confirmacion">
+            🛒
+        </div>
+
+        <h2>
+            Tu carrito está vacío
+        </h2>
+
+        <p>
+            Todavía no has agregado productos a tu compra.
+        </p>
+
+        <br>
+
+        <a th:href="@{/productos}"
+           class="btn-carrito">
+
+            Explorar productos
+
+        </a>
+
+    </div>
+
+    <div th:if="${!#lists.isEmpty(productos)}"
+         class="carrito-layout">
+
+        <section class="productos-carrito">
+
+            <h2 class="titulo-carrito">
+                Productos seleccionados
+            </h2>
+
+            <div th:each="producto : ${productos}"
+                 class="producto-carrito">
+
+                <div class="producto-icono">
+                    ♡
+                </div>
+
+                <div class="producto-info">
+
+                    <h2 th:text="${producto.nombre}">
+                        Producto
+                    </h2>
+
+                    <p>
+                        Producto de cuidado capilar
+                    </p>
+
+                    <div class="producto-precio">
+
+                        $
+                        <span th:text="${producto.precio}">
+                            0
+                        </span>
+
+                    </div>
+
+                    <div class="cantidad">
+
+                        Cantidad:
+                        <strong
+                            th:text="${cantidades[producto.idProducto]}">
+                            1
+                        </strong>
+
+                    </div>
+
+                    <a th:href="@{/carrito/eliminar/{id}(id=${producto.idProducto})}"
+                       class="eliminar">
+
+                        Eliminar
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <aside class="resumen">
+
+            <h2>
+                Resumen de compra
+            </h2>
+
+            <div class="linea">
+
+                <span>
+                    Productos
+                </span>
+
+                <span th:text="${#lists.size(productos)}">
+                    0
+                </span>
+
+            </div>
+
+            <div class="linea">
+
+                <span>
+                    Envío
+                </span>
+
+                <span>
+                    Por calcular
+                </span>
+
+            </div>
+
+            <div class="total">
+
+                <span>
+                    Total
+                </span>
+
+                <span>
+
+                    $
+                    <span th:text="${total}">
+                        0
+                    </span>
+
+                </span>
+
+            </div>
+
+            <a th:href="@{/checkout}"
+               class="btn-checkout">
+
+                Proceder al pago
+
+            </a>
+
+            <a th:href="@{/productos}"
+               class="btn-seguir">
+
+                Continuar comprando
+
+            </a>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="footer-logo">
+                CAPILAR<span>DÍA</span>
+            </div>
+
+            <p>
+                Belleza y cuidado profesional
+                para tu cabello.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Productos
+            </h4>
+
+            <a th:href="@{/productos}">
+                Línea capilar
+            </a>
+
+            <a th:href="@{/productos}">
+                Promociones
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Información
+            </h4>
+
+            <a href="#">
+                Sobre nosotros
+            </a>
+
+            <a href="#">
+                Políticas
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Ayuda
+            </h4>
+
+            <a href="#">
+                Envíos
+            </a>
+
+            <a href="#">
+                Devoluciones
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 CapilarDía. Todos los derechos reservados.
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

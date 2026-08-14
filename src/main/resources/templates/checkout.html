@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/capilar.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finalizar compra | CapilarDía</title>
+
+ 
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-superior">
+
+        <div class="header-contenido">
+
+            <div class="soporte">
+
+                <small>
+                    Soporte al cliente
+                </small>
+
+                <strong>
+                    324 608 7432
+                </strong>
+
+            </div>
+
+            <a th:href="@{/}"
+               class="logo">
+
+                CAPILAR<span>DÍA</span>
+
+            </a>
+
+            <div class="cuenta">
+
+                <a href="#">
+                    Mi cuenta
+                </a>
+
+                <a th:href="@{/carrito}">
+                    Carrito
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="navbar">
+
+        <div class="navbar-contenido">
+
+            <nav class="menu">
+
+                <a th:href="@{/}">
+                    Inicio
+                </a>
+
+                <a th:href="@{/productos}">
+                    Productos
+                </a>
+
+                <a href="#">
+                    Nosotros
+                </a>
+
+                <a href="#">
+                    Contacto
+                </a>
+
+            </nav>
+
+            <a th:href="@{/carrito}"
+               class="volver">
+
+                Volver al carrito
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<section class="checkout-hero">
+
+    <div class="checkout-hero-contenido">
+
+        <span>
+            CAPILARDÍA
+        </span>
+
+        <h1>
+            Finalizar compra
+        </h1>
+
+        <p>
+            Completa tus datos para recibir tu pedido.
+        </p>
+
+    </div>
+
+</section>
+
+<div class="contenedor">
+
+    <div class="checkout-grid">
+
+        <!-- INFORMACIÓN -->
+
+        <section class="bloque">
+
+            <h2>
+                Información de entrega
+            </h2>
+
+            <form th:action="@{/checkout/confirmar}"
+                  method="post">
+
+                <label>
+                    Nombre completo
+                </label>
+
+                <input type="text"
+                       required
+                       placeholder="Tu nombre completo">
+
+                <label>
+                    Correo electrónico
+                </label>
+
+                <input type="email"
+                       required
+                       placeholder="correo@ejemplo.com">
+
+                <label>
+                    Teléfono
+                </label>
+
+                <input type="text"
+                       required
+                       placeholder="Número de contacto">
+
+                <label>
+                    Dirección de entrega
+                </label>
+
+                <textarea
+                    required
+                    placeholder="Dirección completa"></textarea>
+
+                <label>
+                    Método de pago
+                </label>
+
+                <select required>
+
+                    <option value="">
+                        Selecciona una opción
+                    </option>
+
+                    <option>
+                        Pago contra entrega
+                    </option>
+
+                    <option>
+                        Transferencia bancaria
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Confirmar compra
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- RESUMEN -->
+
+        <aside class="bloque">
+
+            <h2>
+                Tu pedido
+            </h2>
+
+            <div th:each="producto : ${productos}"
+                 class="producto">
+
+                <div class="producto-info">
+
+                    <h3 th:text="${producto.nombre}">
+                        Producto
+                    </h3>
+
+                    <p>
+                        Cantidad:
+                        <strong
+                            th:text="${cantidades[producto.idProducto]}">
+                            1
+                        </strong>
+                    </p>
+
+                </div>
+
+                <div class="producto-precio">
+
+                    $
+                    <span th:text="${producto.precio}">
+                        0
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="resumen">
+
+                <div class="fila">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        $
+                        <span th:text="${total}">
+                            0
+                        </span>
+                    </span>
+
+                </div>
+
+                <div class="fila">
+
+                    <span>
+                        Envío
+                    </span>
+
+                    <span>
+                        Por calcular
+                    </span>
+
+                </div>
+
+                <div class="total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span>
+                        $
+                        <span th:text="${total}">
+                            0
+                        </span>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="footer-logo">
+                CAPILAR<span>DÍA</span>
+            </div>
+
+            <p>
+                Belleza y cuidado profesional
+                para tu cabello.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Productos
+            </h4>
+
+            <a th:href="@{/productos}">
+                Línea capilar
+            </a>
+
+            <a th:href="@{/productos}">
+                Promociones
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Información
+            </h4>
+
+            <a href="#">
+                Sobre nosotros
+            </a>
+
+            <a href="#">
+                Políticas
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Ayuda
+            </h4>
+
+            <a href="#">
+                Envíos
+            </a>
+
+            <a href="#">
+                Devoluciones
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 CapilarDía. Todos los derechos reservados.
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

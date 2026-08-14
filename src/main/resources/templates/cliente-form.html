@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cliente | CapilarDía</title>
+
+    
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <h1 th:text="${cliente.idCliente == 0
+                    ? 'Nuevo cliente'
+                    : 'Editar cliente'}">
+
+        Cliente
+
+    </h1>
+
+    <form th:action="@{/clientes/guardar}"
+          th:object="${cliente}"
+          method="post">
+
+        <input type="hidden"
+               th:field="*{idCliente}">
+
+        <label>
+            Nombre
+        </label>
+
+        <input type="text"
+               th:field="*{nombre}"
+               required>
+
+        <label>
+            Correo electrónico
+        </label>
+
+        <input type="email"
+               th:field="*{email}"
+               required>
+
+        <label>
+            Contraseña
+        </label>
+
+        <input type="password"
+               th:field="*{password}"
+               required>
+
+        <label>
+            Rol
+        </label>
+
+        <input type="text"
+               th:field="*{rol}"
+               required>
+
+        <label>
+            Teléfono
+        </label>
+
+        <input type="text"
+               th:field="*{telefono}"
+               required>
+
+        <label>
+            Dirección
+        </label>
+
+        <input type="text"
+               th:field="*{direccion}"
+               required>
+
+        <label>
+            Estado
+        </label>
+
+        <input type="text"
+               th:field="*{estado}"
+               required>
+
+        <div class="botones">
+
+            <button type="submit">
+                Guardar
+            </button>
+
+            <a th:href="@{/clientes}"
+               class="volver">
+
+                Cancelar
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

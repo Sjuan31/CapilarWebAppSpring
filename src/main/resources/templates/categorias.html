@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Categorías | CapilarDía</title>
+
+   
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Capilar<span>Día</span>
+    </div>
+
+    <nav>
+
+        <a th:href="@{/}">
+            Inicio
+        </a>
+
+        <a th:href="@{/productos}">
+            Productos
+        </a>
+
+        <a th:href="@{/categorias}">
+            Categorías
+        </a>
+
+        <a th:href="@{/carrito}">
+            Carrito
+        </a>
+
+    </nav>
+
+</header>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>
+            Línea de cuidado capilar
+        </h1>
+
+        <p>
+            Encuentra el producto ideal para el cuidado de tu cabello.
+        </p>
+
+    </div>
+
+    <div class="categorias">
+
+        <div class="categoria"
+             th:each="categoria : ${categorias}">
+
+            <div class="icono">
+                ♡
+            </div>
+
+            <h2 th:text="${categoria.nombre}">
+                Shampoo
+            </h2>
+
+            <p th:text="${categoria.descripcion}">
+                Productos para el cuidado capilar.
+            </p>
+
+            <a th:href="@{/productos}"
+               class="boton">
+
+                Ver productos
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

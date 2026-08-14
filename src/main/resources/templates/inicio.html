@@ -2,6 +2,8 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    
+    <link rel="stylesheet" th:href="@{/css/capilar.css}">
 
     <meta charset="UTF-8">
 
@@ -10,262 +12,432 @@
 
     <title>CapilarDía</title>
 
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f6f1e8;
-            color: #2f2f2f;
-        }
-
-        .topbar {
-            background: #2f2f2f;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-size: 13px;
-        }
-
-        header {
-            background: #fffaf3;
-            padding: 20px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #e4d8ca;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #2f2f2f;
-        }
-
-        .logo span {
-            color: #b89a67;
-        }
-
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #2f2f2f;
-            font-weight: bold;
-        }
-
-        .hero {
-            width: 88%;
-            margin: 30px auto;
-            background: linear-gradient(
-                90deg,
-                #ead8c4,
-                #f8eee3
-            );
-            border-radius: 14px;
-            padding: 70px 60px;
-            min-height: 320px;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-contenido {
-            max-width: 550px;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 18px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .boton {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #b89a67;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            margin-right: 10px;
-        }
-
-        .boton-secundario {
-            background: #2f2f2f;
-        }
-
-        .seccion {
-            width: 88%;
-            margin: 40px auto;
-            text-align: center;
-        }
-
-        .seccion h2 {
-            margin-bottom: 25px;
-        }
-
-        .tarjetas {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .tarjeta {
-            background: #fffaf3;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #e4d8ca;
-        }
-
-        footer {
-            margin-top: 60px;
-            background: #2f2f2f;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-    </style>
+ 
 
 </head>
 
 <body>
 
-    <div class="topbar">
-        Belleza y cuidado profesional para tu cabello
-    </div>
+<!-- =====================================================
+     CABECERA
+     ===================================================== -->
 
-    <header>
+<header>
 
-        <div class="logo">
-            Capilar<span>Día</span>
-        </div>
+    <div class="header-superior">
 
-        <nav>
+        <div class="header-contenido">
 
-            <a th:href="@{/}">Inicio</a>
+            <div class="soporte">
 
-            <a th:href="@{/productos}">
-                Productos
+                <small>
+                    Soporte al cliente
+                </small>
+
+                <strong>
+                    324 608 7432
+                </strong>
+
+            </div>
+
+            <a th:href="@{/}"
+               class="logo">
+
+                CAPILAR<span>DÍA</span>
+
             </a>
 
-        </nav>
+            <div class="cuenta">
 
-    </header>
+                <a href="#">
+                    ♙ Mi cuenta
+                </a>
 
-    <section class="hero">
+                <a th:href="@{/carrito}">
+                    ♧ Carrito
+                </a>
 
-        <div class="hero-contenido">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="navbar">
+
+        <div class="navbar-contenido">
+
+            <nav class="menu">
+
+                <a th:href="@{/}">
+                    Inicio
+                </a>
+
+                <a th:href="@{/productos}">
+                    Productos
+                </a>
+
+                <a href="#">
+                    Nosotros
+                </a>
+
+                <a href="#">
+                    Contacto
+                </a>
+
+            </nav>
+
+            <div class="buscar">
+
+                <input type="text"
+                       placeholder="Buscar producto...">
+
+                <a th:href="@{/productos}"
+                   class="btn-comprar">
+
+                    Comprar ahora
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-contenido">
+
+        <div class="hero-texto">
+
+            <span>
+                Cuidado capilar
+            </span>
 
             <h1>
-                Cuidado profesional para tu cabello
+                Belleza natural que se siente,
+                se ve y se vive.
             </h1>
 
             <p>
-                Descubre productos pensados para fortalecer,
-                cuidar y mantener tu cabello saludable.
+                Productos profesionales inspirados en
+                el cuidado diario de tu cabello,
+                pensados para acompañarte en cada rutina.
             </p>
 
             <a th:href="@{/productos}"
-               class="boton">
+               class="hero-boton">
 
-                Ver productos
-
-            </a>
-
-            <a th:href="@{/productos/nuevo}"
-               class="boton boton-secundario">
-
-                Agregar producto
+                Explorar productos
 
             </a>
 
         </div>
 
-    </section>
+        <div class="hero-visual">
 
-    <section class="seccion">
+            <div class="decoracion"></div>
+
+            <div class="planta"></div>
+
+            <div class="botella-grande"></div>
+
+            <div class="botella-pequena"></div>
+
+            <div class="frasco"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     CATEGORÍAS PRINCIPALES
+     ===================================================== -->
+
+<section class="categorias">
+
+    <div class="titulo">
 
         <h2>
-            CapilarDía
+            Categorías principales
         </h2>
 
-        <div class="tarjetas">
+    </div>
 
-            <div class="tarjeta">
+    <div class="categorias-grid">
 
-                <h3>
-                    Productos
-                </h3>
+        <a th:href="@{/productos}"
+           class="categoria">
 
-                <p>
-                    Consulta los productos disponibles
-                    en el sistema.
-                </p>
+            <div class="categoria-circulo">
+                <div class="categoria-icono"></div>
+            </div>
 
-                <a th:href="@{/productos}"
-                   class="boton">
+            <h3>
+                Shampoo
+            </h3>
 
-                    Ver productos
+        </a>
 
-                </a>
+        <a th:href="@{/productos}"
+           class="categoria">
+
+            <div class="categoria-circulo">
+                <div class="categoria-icono"></div>
+            </div>
+
+            <h3>
+                Acondicionadores
+            </h3>
+
+        </a>
+
+        <a th:href="@{/productos}"
+           class="categoria">
+
+            <div class="categoria-circulo">
+                <div class="categoria-icono"></div>
+            </div>
+
+            <h3>
+                Tratamientos
+            </h3>
+
+        </a>
+
+        <a th:href="@{/productos}"
+           class="categoria">
+
+            <div class="categoria-circulo">
+                <div class="categoria-icono"></div>
+            </div>
+
+            <h3>
+                Kits
+            </h3>
+
+        </a>
+
+        <a th:href="@{/productos}"
+           class="categoria">
+
+            <div class="categoria-circulo">
+                <div class="categoria-icono"></div>
+            </div>
+
+            <h3>
+                Accesorios
+            </h3>
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     PRODUCTOS DESTACADOS
+     ===================================================== -->
+
+<section class="productos-seccion">
+
+    <div class="titulo">
+
+        <h2>
+            Productos destacados
+        </h2>
+
+        <p>
+            Descubre algunos de nuestros productos favoritos.
+        </p>
+
+    </div>
+
+    <div class="productos-grid">
+
+        <article class="producto"
+                 th:each="producto : ${productos}">
+
+            <div class="producto-visual">
+
+                <div class="producto-botella"></div>
 
             </div>
 
-            <div class="tarjeta">
+            <div class="producto-info">
 
-                <h3>
-                    Registrar
+                <div class="estrellas">
+                    ★★★★★
+                </div>
+
+                <h3 th:text="${producto.nombre}">
+                    Producto
                 </h3>
 
-                <p>
-                    Agrega nuevos productos al catálogo.
-                </p>
+                <div class="producto-precio">
 
-                <a th:href="@{/productos/nuevo}"
-                   class="boton">
+                    $
+                    <span th:text="${producto.precio}">
+                        0
+                    </span>
 
-                    Registrar
+                </div>
 
-                </a>
+                <div class="acciones">
+
+                    <a th:href="@{/producto/{id}(id=${producto.idProducto})}"
+                       class="ver-producto">
+
+                        Ver producto
+
+                    </a>
+
+                    <a th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}"
+                       class="agregar">
+
+                        Agregar
+
+                    </a>
+
+                </div>
 
             </div>
 
-            <div class="tarjeta">
+        </article>
 
-                <h3>
-                    Gestión
-                </h3>
+    </div>
 
-                <p>
-                    Edita o elimina los productos registrados.
-                </p>
+</section>
 
-                <a th:href="@{/productos}"
-                   class="boton">
+<!-- =====================================================
+     NUESTRA PROMESA
+     ===================================================== -->
 
-                    Gestionar
+<section class="promesa">
 
-                </a>
+    <div class="promesa-contenido">
 
-            </div>
+        <div class="promesa-texto">
+
+            <span>
+                Nuestra promesa
+            </span>
+
+            <h2>
+                Cuidado pensado para tu cabello.
+            </h2>
+
+            <p>
+                En CapilarDía creemos que el cuidado capilar
+                hace parte de tu bienestar. Por eso buscamos
+                ofrecer productos que acompañen tu rutina y
+                ayuden a mantener un cabello fuerte, saludable
+                y radiante.
+            </p>
 
         </div>
 
-    </section>
+        <div class="promesa-visual"></div>
 
-    <footer>
+    </div>
 
-        CapilarDía © 2026
+</section>
 
-    </footer>
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="footer-logo">
+                CAPILAR<span>DÍA</span>
+            </div>
+
+            <p>
+                Belleza y cuidado profesional
+                para tu cabello.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Productos
+            </h4>
+
+            <a th:href="@{/productos}">
+                Línea capilar
+            </a>
+
+            <a th:href="@{/productos}">
+                Promociones
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Información
+            </h4>
+
+            <a href="#">
+                Sobre nosotros
+            </a>
+
+            <a href="#">
+                Políticas
+            </a>
+
+            <a href="#">
+                Preguntas frecuentes
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>
+                Ayuda
+            </h4>
+
+            <a href="#">
+                Envíos
+            </a>
+
+            <a href="#">
+                Devoluciones
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 CapilarDía. Todos los derechos reservados.
+
+    </div>
+
+</footer>
 
 </body>
 

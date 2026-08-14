@@ -2,200 +2,255 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
+    
+    <link rel="stylesheet" th:href="@{/css/capilar.css}">
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Productos | CapilarDía</title>
 
-    <style>
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f6f1e8;
-            color: #2f2f2f;
-        }
-
-        .contenedor {
-            width: 92%;
-            max-width: 1100px;
-            margin: 40px auto;
-        }
-
-        .encabezado {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        .nuevo {
-            background: #b89a67;
-            color: white;
-            padding: 11px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        .tabla-contenedor {
-            background: #fffaf3;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #e2d8cb;
-            text-align: left;
-        }
-
-        th {
-            background: #eee4d6;
-        }
-
-        .editar {
-            background: #b89a67;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-right: 5px;
-        }
-
-        .eliminar {
-            background: #a94442;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .vacio {
-            text-align: center;
-            padding: 25px;
-        }
-
-    </style>
+    
 
 </head>
 
 <body>
 
-<div class="contenedor">
+<header>
 
-    <div class="encabezado">
+    <div class="header-superior">
 
-        <h1>Productos CapilarDía</h1>
+        <div class="header-contenido">
 
-        <a th:href="@{/productos/nuevo}"
-           class="nuevo">
+            <div class="soporte">
+                <small>Soporte al cliente</small>
+                <strong>324 608 7432</strong>
+            </div>
 
-            + Nuevo producto
+            <a th:href="@{/}" class="logo">
+                CAPILAR<span>DÍA</span>
+            </a>
 
-        </a>
+            <div class="cuenta">
+                <a href="#">Mi cuenta</a>
+                <a th:href="@{/carrito}">Carrito</a>
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="tabla-contenedor">
+    <div class="navbar">
 
-        <table>
+        <div class="navbar-contenido">
 
-            <thead>
+            <nav class="menu">
 
-                <tr>
+                <a th:href="@{/}">
+                    Inicio
+                </a>
 
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Categoría</th>
-                    <th>Fabricante</th>
-                    <th>Acciones</th>
+                <a th:href="@{/productos}">
+                    Productos
+                </a>
 
-                </tr>
+                <a href="#">
+                    Nosotros
+                </a>
 
-            </thead>
+                <a href="#">
+                    Contacto
+                </a>
 
-            <tbody>
+            </nav>
 
-                <tr th:if="${#lists.isEmpty(productos)}">
+            <a th:href="@{/carrito}" class="btn-carrito">
+                Ver carrito
+            </a>
 
-                    <td colspan="7"
-                        class="vacio">
+        </div>
 
-                        No hay productos registrados.
+    </div>
 
-                    </td>
+</header>
 
-                </tr>
+<section class="encabezado">
 
-                <tr th:each="producto : ${productos}">
+    <div class="encabezado-contenido">
 
-                    <td th:text="${producto.idProducto}">
-                        1
-                    </td>
+        <span>
+            Línea CapilarDía
+        </span>
 
-                    <td th:text="${producto.nombre}">
-                        Shampoo
-                    </td>
+        <h1>
+            Productos para tu cuidado diario.
+        </h1>
 
-                    <td th:text="${producto.precio}">
-                        0.0
-                    </td>
+        <p>
+            Fórmulas y productos seleccionados para
+            mantener tu cabello fuerte, saludable y radiante.
+        </p>
 
-                    <td th:text="${producto.stock}">
+    </div>
+
+</section>
+
+<section class="seccion">
+
+    <div class="titulo">
+
+        <h2>
+            Productos destacados
+        </h2>
+
+        <p>
+            Descubre nuestra línea de cuidado capilar.
+        </p>
+
+    </div>
+
+    <div th:if="${#lists.isEmpty(productos)}"
+         class="vacio">
+
+        No hay productos disponibles actualmente.
+
+    </div>
+
+    <div class="productos">
+
+        <article class="producto"
+                 th:each="producto : ${productos}">
+
+            <div class="visual">
+
+                <div class="producto-botella"></div>
+
+            </div>
+
+            <div class="informacion">
+
+                <div class="estrellas">
+                    ★★★★★
+                </div>
+
+                <h3 th:text="${producto.nombre}">
+                    Producto
+                </h3>
+
+                <div class="precio">
+
+                    $
+                    <span th:text="${producto.precio}">
                         0
-                    </td>
+                    </span>
 
-                    <td th:text="${producto.idCategoria}">
-                        1
-                    </td>
+                </div>
 
-                    <td th:text="${producto.idFabricante}">
-                        1
-                    </td>
+                <div class="stock">
 
-                    <td>
+                    Disponible:
+                    <span th:text="${producto.stock}">
+                        0
+                    </span>
+                    unidades
 
-                        <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}"
-                           class="editar">
+                </div>
 
-                            Editar
+                <div class="acciones">
 
-                        </a>
+                    <a th:href="@{/producto/{id}(id=${producto.idProducto})}"
+                       class="ver">
 
-                        <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}"
-                           class="eliminar"
-                           onclick="return confirm('¿Desea eliminar este producto?');">
+                        Ver producto
 
-                            Eliminar
+                    </a>
 
-                        </a>
+                    <a th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}"
+                       class="agregar">
 
-                    </td>
+                        Agregar
 
-                </tr>
+                    </a>
 
-            </tbody>
+                </div>
 
-        </table>
+            </div>
+
+        </article>
 
     </div>
 
-</div>
+</section>
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="footer-logo">
+                CAPILAR<span>DÍA</span>
+            </div>
+
+            <p>
+                Belleza y cuidado profesional
+                para tu cabello.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>Productos</h4>
+
+            <a th:href="@{/productos}">
+                Línea capilar
+            </a>
+
+            <a th:href="@{/productos}">
+                Promociones
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>Información</h4>
+
+            <a href="#">
+                Sobre nosotros
+            </a>
+
+            <a href="#">
+                Políticas
+            </a>
+
+        </div>
+
+        <div>
+
+            <h4>Ayuda</h4>
+
+            <a href="#">
+                Envíos
+            </a>
+
+            <a href="#">
+                Devoluciones
+            </a>
+
+            <a href="#">
+                Contacto
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 CapilarDía. Todos los derechos reservados.
+    </div>
+
+</footer>
 
 </body>
 

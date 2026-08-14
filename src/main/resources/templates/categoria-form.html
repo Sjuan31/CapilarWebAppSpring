@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Categoría | CapilarDía</title>
+
+   
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <h1 th:text="${categoria.idCategoria == 0
+                    ? 'Nueva categoría'
+                    : 'Editar categoría'}">
+
+        Categoría
+
+    </h1>
+
+    <form th:action="@{/categorias/guardar}"
+          th:object="${categoria}"
+          method="post">
+
+        <input type="hidden"
+               th:field="*{idCategoria}">
+
+        <label>
+            Nombre
+        </label>
+
+        <input type="text"
+               th:field="*{nombre}"
+               required>
+
+        <label>
+            Descripción
+        </label>
+
+        <textarea
+            th:field="*{descripcion}"
+            required>
+        </textarea>
+
+        <div class="botones">
+
+            <button type="submit">
+                Guardar
+            </button>
+
+            <a th:href="@{/categorias}"
+               class="volver">
+
+                Cancelar
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>
