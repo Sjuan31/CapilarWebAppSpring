@@ -1,40 +1,42 @@
+
 package com.mycompany.capilarwebapp.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * Representa un producto de la tienda CapilarDía.
- * Esta entidad se relaciona con la tabla producto de la base de datos.
- */
 @Entity
 @Table(name = "producto")
 public class Producto {
 
     @Id
+    @Column(name = "id_producto")
     private int idProducto;
 
+    @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "precio")
     private float precio;
 
+    @Column(name = "stock")
     private int stock;
 
+    @Column(name = "imagen")
     private String imagen;
 
+    @Column(name = "id_categoria")
     private int idCategoria;
 
+    @Column(name = "id_fabricante")
     private int idFabricante;
 
-    // Constructor vacío requerido por JPA
     public Producto() {
     }
 
-    // Constructor con parámetros
-    public Producto(int idProducto, String nombre, float precio, int stock,
-            String imagen, int idCategoria, int idFabricante) {
-
+    public Producto(int idProducto, String nombre, float precio,
+            int stock, String imagen, int idCategoria, int idFabricante) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.precio = precio;
@@ -102,7 +104,6 @@ public class Producto {
 
     @Override
     public String toString() {
-
         return "Producto{" +
                 "idProducto=" + idProducto +
                 ", nombre='" + nombre + '\'' +
@@ -112,6 +113,5 @@ public class Producto {
                 ", idCategoria=" + idCategoria +
                 ", idFabricante=" + idFabricante +
                 '}';
-
     }
 }

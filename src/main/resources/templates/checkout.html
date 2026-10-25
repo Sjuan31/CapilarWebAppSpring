@@ -122,67 +122,54 @@
             <h2>
                 Información de entrega
             </h2>
+<form th:action="@{/checkout/confirmar}" method="post">
 
-            <form th:action="@{/checkout/confirmar}"
-                  method="post">
+    <label for="nombre">Nombre completo</label>
+    <input type="text"
+           id="nombre"
+           name="nombre"
+           required
+           minlength="3"
+           maxlength="100"
+           placeholder="Tu nombre completo">
 
-                <label>
-                    Nombre completo
-                </label>
+    <label for="email">Correo electrónico</label>
+    <input type="email"
+           id="email"
+           name="email"
+           maxlength="100"
+           required
+           placeholder="correo@ejemplo.com">
 
-                <input type="text"
-                       required
-                       placeholder="Tu nombre completo">
+    <label for="telefono">Teléfono</label>
+    <input type="tel"
+           id="telefono"
+           name="telefono"
+           pattern="[0-9]{10}"
+           title="Ingresa exactamente 10 dígitos"
+           required
+           placeholder="3001234567">
 
-                <label>
-                    Correo electrónico
-                </label>
+    <label for="direccion">Dirección de entrega</label>
+    <textarea id="direccion"
+              name="direccion"
+              maxlength="255"
+              required
+              placeholder="Dirección completa"></textarea>
 
-                <input type="email"
-                       required
-                       placeholder="correo@ejemplo.com">
+    <label for="metodoPago">Método de pago</label>
+    <select id="metodoPago"
+            name="metodoPago"
+            required>
+        <option value="">Selecciona una opción</option>
+        <option value="contra_entrega">Pago contra entrega</option>
+        <option value="transferencia">Transferencia bancaria</option>
+    </select>
 
-                <label>
-                    Teléfono
-                </label>
+    <button type="submit">Confirmar compra</button>
 
-                <input type="text"
-                       required
-                       placeholder="Número de contacto">
+</form>
 
-                <label>
-                    Dirección de entrega
-                </label>
-
-                <textarea
-                    required
-                    placeholder="Dirección completa"></textarea>
-
-                <label>
-                    Método de pago
-                </label>
-
-                <select required>
-
-                    <option value="">
-                        Selecciona una opción
-                    </option>
-
-                    <option>
-                        Pago contra entrega
-                    </option>
-
-                    <option>
-                        Transferencia bancaria
-                    </option>
-
-                </select>
-
-                <button type="submit">
-                    Confirmar compra
-                </button>
-
-            </form>
 
         </section>
 

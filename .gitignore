@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Evidencias y archivos locales
+JUAN_DANIEL_ALZATE_AA3_EV01.zip
+nbactions.xml
+
+# Variables de entorno y configuraciones locales
+.env
+.env.*
+!.env.example
+application-local.properties

@@ -180,11 +180,15 @@
                         </strong>
 
                     </div>
+                    <a th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}"
+                       class="eliminar">
+                         + Agregar una unidad
+                    </a>
 
                     <a th:href="@{/carrito/eliminar/{id}(id=${producto.idProducto})}"
                        class="eliminar">
 
-                        Eliminar
+                        − Quitar una unidad
 
                     </a>
 
@@ -206,7 +210,7 @@
                     Productos
                 </span>
 
-                <span th:text="${#lists.size(productos)}">
+                <span th:text="${#aggregates.sum(cantidades.values())}">
                     0
                 </span>
 
