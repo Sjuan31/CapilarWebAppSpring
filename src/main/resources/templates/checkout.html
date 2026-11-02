@@ -1,212 +1,696 @@
+
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link rel="stylesheet" th:href="@{/css/capilar.css}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F5F0E9">
 
     <title>Finalizar compra | CapilarDía</title>
 
- 
+    <style>
+        :root {
+            --marfil: #F5F0E9;
+            --arena: #E6DCCE;
+            --beige: #B49A76;
+            --marron: #493D33;
+            --marron-claro: #75685B;
+            --blanco: #FFFDFA;
+            --borde: #DED2C3;
+            --error: #9B3028;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--marfil);
+            color: var(--marron);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button,
+        select {
+            cursor: pointer;
+        }
+
+        .ancho {
+            width: min(1170px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        /* ENCABEZADO */
+
+        .header-superior {
+            background: #FAF7F2;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .header-contenido {
+            min-height: 78px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .soporte {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            font-size: 12px;
+        }
+
+        .soporte small {
+            color: var(--marron-claro);
+        }
+
+        .logo {
+            justify-self: center;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 29px;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .logo span,
+        .footer-logo span {
+            color: var(--beige);
+        }
+
+        .cuenta {
+            display: flex;
+            justify-content: flex-end;
+            gap: 22px;
+            font-size: 12px;
+        }
+
+        .cuenta a:hover,
+        .menu a:hover,
+        .volver:hover {
+            color: var(--beige);
+        }
+
+        .navbar {
+            background: #FAF7F2;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .navbar-contenido {
+            min-height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .menu a {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .volver {
+            font-size: 13px;
+        }
+
+        /* TÍTULO */
+
+        .checkout-hero {
+            background: var(--arena);
+            padding: 42px 0;
+        }
+
+        .checkout-hero-contenido {
+            width: min(1170px, calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        .checkout-hero-contenido > span {
+            color: var(--beige);
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .checkout-hero h1 {
+            margin: 5px 0 4px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(32px, 4vw, 44px);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .checkout-hero p {
+            margin: 8px 0 0;
+            color: var(--marron-claro);
+        }
+
+        /* CONTENIDO PRINCIPAL */
+
+        .contenedor {
+            width: min(1170px, calc(100% - 48px));
+            margin: 46px auto 72px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+            align-items: start;
+            gap: 28px;
+        }
+
+        .bloque {
+            min-width: 0;
+            padding: 30px;
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+        }
+
+        .bloque h2 {
+            margin: 0 0 24px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        /* FORMULARIO */
+
+        .campo {
+            margin-bottom: 19px;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--marron);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .campo input,
+        .campo textarea,
+        .campo select {
+            display: block;
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid var(--borde);
+            border-radius: 0;
+            outline: none;
+            background: #FFFFFF;
+            color: var(--marron);
+            transition: border-color 160ms ease;
+        }
+
+        .campo textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .campo input::placeholder,
+        .campo textarea::placeholder {
+            color: #9A8E81;
+        }
+
+        .campo input:focus,
+        .campo textarea:focus,
+        .campo select:focus {
+            border-color: var(--beige);
+            box-shadow: 0 0 0 2px rgba(180, 154, 118, 0.12);
+        }
+
+        .ayuda-campo {
+            display: block;
+            margin-top: 5px;
+            color: var(--marron-claro);
+            font-size: 11px;
+        }
+
+        .boton-principal {
+            display: inline-flex;
+            width: 100%;
+            min-height: 50px;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 20px;
+            border: 1px solid var(--marron);
+            background: var(--marron);
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: background 180ms ease;
+        }
+
+        .boton-principal:hover {
+            background: #625142;
+        }
+
+        /* RESUMEN DEL PEDIDO */
+
+        .pedido-bloque {
+            position: sticky;
+            top: 20px;
+        }
+
+        .pedido-productos {
+            border: 1px solid var(--borde);
+        }
+
+        .producto {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--borde);
+        }
+
+        .producto:last-child {
+            border-bottom: 0;
+        }
+
+        .producto h3 {
+            margin: 0 0 9px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .producto-cantidad {
+            color: var(--marron-claro);
+            font-size: 12px;
+        }
+
+        .producto-precio {
+            align-self: center;
+            color: var(--beige);
+            font-size: 15px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .resumen {
+            padding-top: 20px;
+        }
+
+        .fila,
+        .total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .fila {
+            padding: 8px 0;
+            color: var(--marron-claro);
+            font-size: 13px;
+        }
+
+        .total {
+            margin-top: 14px;
+            padding-top: 18px;
+            border-top: 1px solid var(--borde);
+            font-size: 16px;
+        }
+
+        .total strong {
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        .nota-pedido {
+            margin: 16px 0 0;
+            color: var(--marron-claro);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            padding: 48px 0 0;
+            border-top: 1px solid var(--borde);
+            background: #FAF7F2;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 35px;
+            padding-bottom: 38px;
+        }
+
+        .footer-logo {
+            margin-bottom: 12px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 24px;
+        }
+
+        .footer-grid p {
+            max-width: 230px;
+            color: var(--marron-claro);
+            font-size: 12px;
+        }
+
+        .footer-grid h4 {
+            margin: 0 0 15px;
+            font-size: 12px;
+        }
+
+        .footer-grid > div:not(:first-child) a {
+            display: block;
+            margin: 9px 0;
+            color: var(--marron-claro);
+            font-size: 12px;
+        }
+
+        .copyright {
+            padding: 18px 24px;
+            border-top: 1px solid var(--borde);
+            color: var(--marron-claro);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 800px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pedido-bloque {
+                position: static;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .ancho,
+            .contenedor,
+            .checkout-hero-contenido {
+                width: calc(100% - 30px);
+            }
+
+            .header-contenido {
+                min-height: 72px;
+                grid-template-columns: 1fr auto;
+                gap: 8px;
+                padding: 12px 0;
+            }
+
+            .soporte {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .logo {
+                grid-column: 1;
+                grid-row: 1;
+                justify-self: start;
+                font-size: 24px;
+            }
+
+            .cuenta {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 9px;
+            }
+
+            .navbar-contenido {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 14px 0;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                gap: 12px 18px;
+            }
+
+            .menu a {
+                font-size: 10px;
+            }
+
+            .checkout-hero {
+                padding: 32px 0;
+            }
+
+            .contenedor {
+                margin: 24px auto 45px;
+            }
+
+            .checkout-grid {
+                gap: 18px;
+            }
+
+            .bloque {
+                padding: 20px 16px;
+            }
+
+            .bloque h2 {
+                font-size: 22px;
+            }
+
+            .producto {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 7px;
+                padding: 16px;
+            }
+
+            .producto-precio {
+                justify-self: start;
+            }
+
+            .total strong {
+                font-size: 20px;
+            }
+
+            .footer-grid {
+                gap: 24px 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-
     <div class="header-superior">
-
-        <div class="header-contenido">
+        <div class="header-contenido ancho">
 
             <div class="soporte">
-
-                <small>
-                    Soporte al cliente
-                </small>
-
-                <strong>
-                    324 608 7432
-                </strong>
-
+                <small>Soporte al cliente</small>
+                <strong>324 608 7432</strong>
             </div>
 
-            <a th:href="@{/}"
-               class="logo">
-
+            <a th:href="@{/}" class="logo" aria-label="CapilarDía, inicio">
                 CAPILAR<span>DÍA</span>
-
             </a>
 
             <div class="cuenta">
-
-                <a href="#">
-                    Mi cuenta
-                </a>
-
-                <a th:href="@{/carrito}">
-                    Carrito
-                </a>
-
+                <a th:href="@{/}">Mi cuenta</a>
+                <a th:href="@{/carrito}">Carrito</a>
             </div>
 
         </div>
-
     </div>
 
     <div class="navbar">
+        <div class="navbar-contenido ancho">
 
-        <div class="navbar-contenido">
-
-            <nav class="menu">
-
-                <a th:href="@{/}">
-                    Inicio
-                </a>
-
-                <a th:href="@{/productos}">
-                    Productos
-                </a>
-
-                <a href="#">
-                    Nosotros
-                </a>
-
-                <a href="#">
-                    Contacto
-                </a>
-
+            <nav class="menu" aria-label="Navegación principal">
+                <a th:href="@{/}">Inicio</a>
+                <a th:href="@{/productos}">Productos</a>
+                <a th:href="@{/#nosotros}">Nosotros</a>
+                <a th:href="@{/#contacto}">Contacto</a>
             </nav>
 
-            <a th:href="@{/carrito}"
-               class="volver">
-
+            <a th:href="@{/carrito}" class="volver">
                 Volver al carrito
-
             </a>
 
         </div>
-
     </div>
-
 </header>
 
 <section class="checkout-hero">
-
     <div class="checkout-hero-contenido">
-
-        <span>
-            CAPILARDÍA
-        </span>
-
-        <h1>
-            Finalizar compra
-        </h1>
-
-        <p>
-            Completa tus datos para recibir tu pedido.
-        </p>
-
+        <span>CAPILARDÍA</span>
+        <h1>Finalizar compra</h1>
+        <p>Completa tus datos para recibir tu pedido.</p>
     </div>
-
 </section>
 
-<div class="contenedor">
-
+<main class="contenedor">
     <div class="checkout-grid">
 
-        <!-- INFORMACIÓN -->
+        <!-- INFORMACIÓN DE ENTREGA -->
 
         <section class="bloque">
+            <h2>Información de entrega</h2>
 
-            <h2>
-                Información de entrega
-            </h2>
-<form th:action="@{/checkout/confirmar}" method="post">
+            <form th:action="@{/checkout/confirmar}" method="post">
 
-    <label for="nombre">Nombre completo</label>
-    <input type="text"
-           id="nombre"
-           name="nombre"
-           required
-           minlength="3"
-           maxlength="100"
-           placeholder="Tu nombre completo">
+                <div class="campo">
+                    <label for="nombre">Nombre completo</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        minlength="3"
+                        maxlength="100"
+                        autocomplete="name"
+                        placeholder="Tu nombre completo">
+                </div>
 
-    <label for="email">Correo electrónico</label>
-    <input type="email"
-           id="email"
-           name="email"
-           maxlength="100"
-           required
-           placeholder="correo@ejemplo.com">
+                <div class="campo">
+                    <label for="email">Correo electrónico</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        maxlength="100"
+                        required
+                        autocomplete="email"
+                        placeholder="correo@ejemplo.com">
+                </div>
 
-    <label for="telefono">Teléfono</label>
-    <input type="tel"
-           id="telefono"
-           name="telefono"
-           pattern="[0-9]{10}"
-           title="Ingresa exactamente 10 dígitos"
-           required
-           placeholder="3001234567">
+                <div class="campo">
+                    <label for="telefono">Teléfono</label>
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        pattern="[0-9]{10}"
+                        title="Ingresa exactamente 10 dígitos"
+                        minlength="10"
+                        maxlength="10"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        required
+                        placeholder="3001234567">
+                    <small class="ayuda-campo">
+                        Ingresa tu número de celular de 10 dígitos.
+                    </small>
+                </div>
 
-    <label for="direccion">Dirección de entrega</label>
-    <textarea id="direccion"
-              name="direccion"
-              maxlength="255"
-              required
-              placeholder="Dirección completa"></textarea>
+                <div class="campo">
+                    <label for="direccion">Dirección de entrega</label>
+                    <textarea
+                        id="direccion"
+                        name="direccion"
+                        maxlength="255"
+                        autocomplete="street-address"
+                        required
+                        placeholder="Dirección completa, barrio y municipio"></textarea>
+                </div>
 
-    <label for="metodoPago">Método de pago</label>
-    <select id="metodoPago"
-            name="metodoPago"
-            required>
-        <option value="">Selecciona una opción</option>
-        <option value="contra_entrega">Pago contra entrega</option>
-        <option value="transferencia">Transferencia bancaria</option>
-    </select>
+                <div class="campo">
+                    <label for="metodoPago">Método de pago</label>
+                    <select id="metodoPago" name="metodoPago" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="contra_entrega">Pago contra entrega</option>
+                        <option value="transferencia">Transferencia bancaria</option>
+                    </select>
+                </div>
 
-    <button type="submit">Confirmar compra</button>
+                <button type="submit" class="boton-principal">
+                    Confirmar compra
+                </button>
 
-</form>
-
-
+            </form>
         </section>
 
-        <!-- RESUMEN -->
+        <!-- RESUMEN DEL PEDIDO -->
 
-        <aside class="bloque">
+        <aside class="bloque pedido-bloque">
+            <h2>Tu pedido</h2>
 
-            <h2>
-                Tu pedido
-            </h2>
+            <div class="pedido-productos">
 
-            <div th:each="producto : ${productos}"
-                 class="producto">
+                <div
+                    th:each="producto : ${productos}"
+                    class="producto">
 
-                <div class="producto-info">
+                    <div class="producto-info">
+                        <h3 th:text="${producto.nombre}">
+                            Producto
+                        </h3>
 
-                    <h3 th:text="${producto.nombre}">
-                        Producto
-                    </h3>
+                        <div class="producto-cantidad">
+                            Cantidad:
+                            <strong
+                                th:text="${cantidades[producto.idProducto]}">
+                                1
+                            </strong>
+                        </div>
+                    </div>
 
-                    <p>
-                        Cantidad:
-                        <strong
-                            th:text="${cantidades[producto.idProducto]}">
-                            1
-                        </strong>
-                    </p>
+                    <div class="producto-precio">
+                        $
+                        <span
+                            th:text="${#numbers.formatDecimal(producto.precio * cantidades[producto.idProducto], 1, 'POINT', 0, 'COMMA')}">
+                            0
+                        </span>
+                    </div>
 
                 </div>
 
-                <div class="producto-precio">
-
-                    $
-                    <span th:text="${producto.precio}">
-                        0
-                    </span>
-
+                <div
+                    th:if="${#lists.isEmpty(productos)}"
+                    style="padding: 22px; color: #75685B;">
+                    Tu carrito está vacío.
+                    <a th:href="@{/productos}"
+                       style="text-decoration: underline;">
+                        Ver productos
+                    </a>
                 </div>
 
             </div>
@@ -214,134 +698,75 @@
             <div class="resumen">
 
                 <div class="fila">
-
-                    <span>
-                        Subtotal
-                    </span>
-
+                    <span>Subtotal</span>
                     <span>
                         $
-                        <span th:text="${total}">
+                        <span
+                            th:text="${#numbers.formatDecimal(total, 1, 'POINT', 0, 'COMMA')}">
                             0
                         </span>
                     </span>
-
                 </div>
 
                 <div class="fila">
-
-                    <span>
-                        Envío
-                    </span>
-
-                    <span>
-                        Por calcular
-                    </span>
-
+                    <span>Envío</span>
+                    <span>Por calcular</span>
                 </div>
 
                 <div class="total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <span>
+                    <span>Total</span>
+                    <strong>
                         $
-                        <span th:text="${total}">
+                        <span
+                            th:text="${#numbers.formatDecimal(total, 1, 'POINT', 0, 'COMMA')}">
                             0
                         </span>
-                    </span>
-
+                    </strong>
                 </div>
 
-            </div>
+                <p class="nota-pedido">
+                    El importe del pedido se validará al confirmar la compra.
+                    El costo de envío se calculará por separado si corresponde.
+                </p>
 
+            </div>
         </aside>
 
     </div>
-
-</div>
+</main>
 
 <footer>
-
-    <div class="footer-grid">
+    <div class="footer-grid ancho">
 
         <div>
-
-            <div class="footer-logo">
-                CAPILAR<span>DÍA</span>
-            </div>
-
-            <p>
-                Belleza y cuidado profesional
-                para tu cabello.
-            </p>
-
+            <div class="footer-logo">CAPILAR<span>DÍA</span></div>
+            <p>Belleza y cuidado profesional para tu cabello.</p>
         </div>
 
         <div>
-
-            <h4>
-                Productos
-            </h4>
-
-            <a th:href="@{/productos}">
-                Línea capilar
-            </a>
-
-            <a th:href="@{/productos}">
-                Promociones
-            </a>
-
+            <h4>Productos</h4>
+            <a th:href="@{/productos}">Línea capilar</a>
+            <a th:href="@{/productos}">Nuestros productos</a>
         </div>
 
         <div>
-
-            <h4>
-                Información
-            </h4>
-
-            <a href="#">
-                Sobre nosotros
-            </a>
-
-            <a href="#">
-                Políticas
-            </a>
-
+            <h4>Información</h4>
+            <a th:href="@{/#nosotros}">Sobre nosotros</a>
+            <a th:href="@{/#contacto}">Contacto</a>
         </div>
 
         <div>
-
-            <h4>
-                Ayuda
-            </h4>
-
-            <a href="#">
-                Envíos
-            </a>
-
-            <a href="#">
-                Devoluciones
-            </a>
-
-            <a href="#">
-                Contacto
-            </a>
-
+            <h4>Ayuda</h4>
+            <a th:href="@{/carrito}">Carrito y pedidos</a>
+            <a th:href="@{/#contacto}">Atención al cliente</a>
         </div>
 
     </div>
 
     <div class="copyright">
-
         © 2026 CapilarDía. Todos los derechos reservados.
-
     </div>
-
 </footer>
 
 </body>
-
 </html>

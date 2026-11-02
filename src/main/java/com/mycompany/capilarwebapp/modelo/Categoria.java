@@ -3,6 +3,9 @@ package com.mycompany.capilarwebapp.modelo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
 /**
  * Entidad que representa una categoría de productos.
@@ -12,6 +15,8 @@ import jakarta.persistence.Table;
 public class Categoria {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria")
     private int idCategoria;
 
     private String nombre;

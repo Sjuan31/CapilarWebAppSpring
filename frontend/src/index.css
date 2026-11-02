@@ -1,0 +1,86 @@
+
+/* ==========================================
+   CAPILARDÍA - ESTILOS GLOBALES
+   Concepto C: Scandinavian Premium
+   ========================================== */
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #493D33;
+  background: #F5F0E9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Paleta neutra de la identidad visual. */
+  --marfil: #F5F0E9;
+  --arena: #E6DCCE;
+  --beige: #B49A76;
+  --marron: #493D33;
+  --blanco: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--marfil);
+  color: var(--marron);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  text-align: left;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--beige);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--arena);
+  color: var(--marron);
+}

@@ -1,4 +1,3 @@
-
 package com.mycompany.capilarwebapp.repository;
 
 import com.mycompany.capilarwebapp.modelo.Producto;
@@ -17,4 +16,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT p FROM Producto p WHERE p.idProducto = :id")
     Optional<Producto> buscarPorIdConBloqueo(@Param("id") int id);
+
+    boolean existsByIdCategoria(int idCategoria);
+
+    boolean existsByIdFabricante(int idFabricante);
 }

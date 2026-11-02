@@ -1,49 +1,57 @@
 package com.mycompany.capilarwebapp.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.sql.Timestamp;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
-/**
- * Entidad que representa un cliente de CapilarDía.
- */
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private int idCliente;
 
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
+
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
+
+    @Column(name = "rol", length = 20)
     private String rol;
+
+    @Column(name = "telefono", length = 20)
     private String telefono;
+
+    @Column(name = "direccion", length = 255)
     private String direccion;
+
+    @Column(name = "fecha_registro")
     private Timestamp fechaRegistro;
+
+    @Column(name = "estado", length = 20)
     private String estado;
 
     public Cliente() {
     }
 
-    public Cliente(int idCliente, String nombre, String email,
-            String password, String rol, String telefono,
-            String direccion, Timestamp fechaRegistro,
-            String estado) {
+    @PrePersist
+    public void antesDeGuardar() {
+        if (fechaRegistro == null) {
+            fechaRegistro = new Timestamp(System.currentTimeMillis());
+        }
 
-        this.idCliente = idCliente;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.rol = rol;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.fechaRegistro = fechaRegistro;
-        this.estado = estado;
+        if (rol == null || rol.isBlank()) {
+            rol = "cliente";
+        }
+
+        if (estado == null || estado.isBlank()) {
+            estado = "Activo";
+        }
     }
 
     public int getIdCliente() {
